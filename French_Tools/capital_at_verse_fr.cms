@@ -1,7 +1,7 @@
 ﻿\check Rapport des majuscules en début de verset
 \submenu Outils_Français
 \script capital_at_verse_fr.py
-\description Signale une majuscule après un numéro de verset quand le verset précédent se termine par une ponctuation qui ne finit pas la phrase (p. ex. virgule, point-virgule, deux-points). Des options permettent de choisir les caractères de fin de phrase, les mots/préfixes/suffixes à ignorer, le traitement des guillemets ouvrants et les styles de caractère/paragraphe à sauter. Écrit aussi un rapport HTML (RapportMajusculeDebutVerset.html, ouvert automatiquement) qui montre trois mots de contexte avant et après chaque numéro de verset signalé, sans les notes de bas de page, renvois et illustrations. Les rendus des termes bibliques avec majuscule et les mots que la liste de mots du projet écrit toujours avec une majuscule peuvent être ignorés. Quand ptx_goto.py et ParatextGoTo.exe sont dans le dossier cms, un clic sur une référence du rapport affiche ce verset dans Paratext.
+\description Signale une majuscule après un numéro de verset quand le verset précédent se termine par une ponctuation qui ne finit pas la phrase (p. ex. virgule, point-virgule, deux-points). Des options permettent de choisir les caractères de fin de phrase, les mots/préfixes/suffixes à ignorer, le traitement des guillemets ouvrants et les styles de caractère/paragraphe à sauter. Écrit aussi un rapport HTML (RapportMajusculeDebutVerset.html, ouvert automatiquement) qui montre trois mots de contexte avant et après chaque numéro de verset signalé, sans les notes de bas de page, renvois et illustrations. Les rendus des termes bibliques avec majuscule et les mots que la liste de mots du projet écrit toujours avec une majuscule peuvent être ignorés. Les noms avec majuscule d’un fichier de dictionnaire Toolbox/SFM (.dic) facultatif peuvent aussi être ignorés. Quand ptx_goto.py et ParatextGoTo.exe sont dans le dossier cms, un clic sur une référence du rapport affiche ce verset dans Paratext.
 \books
 \noText
 \toList
@@ -27,6 +27,21 @@
 \optionDescription Yes ignore un mot que la liste de mots du projet indique comme toujours écrit avec une majuscule (une casse précise dans SpellingStatus.xml, p. ex. Galilaaya). Un tel mot auquel s’ajoute l’un des préfixes/suffixes à ignorer est aussi ignoré.
 \optionDefault Yes
 
+\optionName NamesDictionaryFile
+\optionLocalizedName Fichier du dictionnaire de noms (facultatif)
+\optionDescription Facultatif. Chemin complet d’un fichier de dictionnaire Toolbox/SFM (.dic) dont les noms avec majuscule ne doivent pas être signalés, p. ex. C:\Dictionaries\names.dic. Laissez ce champ vide (valeur par défaut) pour désactiver la fonction. Les marqueurs à lire se règlent avec « Marqueurs du dictionnaire de noms » ci-dessous.
+\optionDefault
+
+\optionName NamesDictionaryMarkers
+\optionLocalizedName Marqueurs du dictionnaire de noms
+\optionDescription Noms de marqueurs (sans barre oblique inverse), séparés par des virgules, dont les valeurs sont lues dans le fichier du dictionnaire de noms, p. ex. lx ou lx, a. Saisissez les marqueurs de votre choix ; seuls les lettres, chiffres et traits de soulignement sont acceptés. Le premier mot de chaque valeur est utilisé, sans + initial et sans rien de ce qui suit un / ou un |. Seuls les noms commençant par une majuscule sont utilisés. Sans effet tant que « Fichier du dictionnaire de noms (facultatif) » est vide.
+\optionDefault lx
+
+\optionName NamesDictionaryAllowSuffixes
+\optionLocalizedName Dictionnaire de noms : accepter les suffixes
+\optionDescription Yes ignore aussi tout mot avec majuscule en début de verset qui COMMENCE par un nom du dictionnaire de noms, suivi de suffixes quelconques. No ne saute que les noms exacts. Sans effet tant que « Fichier du dictionnaire de noms (facultatif) » est vide.
+\optionDefault No
+
 \optionName IgnoreCapAfterQuote
 \optionLocalizedName Ignorer la majuscule après un guillemet ouvrant
 \optionDescription Yes supprime les erreurs où un verset commence par un mot avec majuscule juste après un guillemet ouvrant (p. ex. discours direct). Les caractères traités comme guillemets ouvrants se règlent avec l’option « Caractères de guillemet ouvrant » ci-dessous.
@@ -39,13 +54,13 @@
 
 \optionName IgnoreStyles
 \optionLocalizedName Styles de caractère à ignorer
-\optionDescription Noms de styles de caractère USFM (sans barre oblique inverse), séparés par des virgules, dont le texte est exclu pour trouver le dernier caractère d’un verset. Pour des styles comme qs (Sélah) ou pn (noms propres) qui ne se terminent pas par une ponctuation de fin de phrase.
-\optionDefault
+\optionDescription Noms de styles de caractère USFM (sans barre oblique inverse), séparés par des virgules, dont le texte est exclu pour trouver le dernier caractère d’un verset. Par défaut : qs (Sélah), pour qu’un Sélah en fin de verset ne soit pas pris pour son dernier caractère. Ajoutez-en d’autres, comme pn (noms propres), qui ne se terminent pas par une ponctuation de fin de phrase.
+\optionDefault qs
 
 \optionName IgnoreParaStyles
 \optionLocalizedName Styles de paragraphe à ignorer
-\optionDescription Noms de marqueurs de paragraphe USFM (sans barre oblique inverse), séparés par des virgules, dont le texte est exclu pour trouver le dernier caractère d’un verset. Valeur par défaut : sp (locuteur), r (référence parallèle), ms/mr (division majeure), sr (plage de la section). Les titres de section (s, s1, s2...) sont écartés automatiquement, sans cette option. Un changement de paragraphe dont le seul texte avant le verset suivant vient de ces styles (p. ex. titre \s1, puis locuteur \sp, puis \q1) supprime aussi la vérification.
-\optionDefault sp, r, ms, mr, sr
+\optionDescription Noms de marqueurs de paragraphe USFM (sans barre oblique inverse), séparés par des virgules, dont le texte est exclu pour trouver le dernier caractère d’un verset. Valeur par défaut : sp (locuteur), r (référence parallèle), ms/mr (division majeure), sr (plage de la section), qa (nom de lettre acrostiche). Les titres de section (s, s1, s2...) sont écartés automatiquement, sans cette option. Un changement de paragraphe dont le seul texte avant le verset suivant vient de ces styles (p. ex. titre \s1, puis locuteur \sp, puis \q1) supprime aussi la vérification.
+\optionDefault sp, r, ms, mr, sr, qa
 
 \optionName PrefixesToIgnore
 \optionLocalizedName Préfixes de mots à ignorer

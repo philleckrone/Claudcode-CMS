@@ -1,7 +1,7 @@
 ﻿\check Informe de Mayúscula al Inicio de Versículo
 \submenu Herramientas_Español
 \script capital_at_verse_sp.py
-\description Marca una letra mayúscula después de un número de versículo cuando el versículo anterior terminó con puntuación que no es de fin de oración (p. ej., coma, punto y coma, dos puntos). Las opciones permiten definir los caracteres de fin de oración, palabras/prefijos/sufijos para ignorar, el manejo de comillas de apertura y los estilos de carácter/párrafo a omitir. También escribe un informe HTML (CapitalAtVerseReport.html, se abre automáticamente) que muestra tres palabras de contexto antes y después de cada versículo marcado, excluyendo notas al pie, referencias cruzadas y figuras del contexto. Se pueden ignorar las traducciones con mayúscula de los Términos bíblicos y las palabras que la lista de palabras del proyecto siempre escribe con mayúscula. Si ptx_goto.py y ParatextGoTo.exe están en la carpeta cms, al hacer clic en una referencia del informe Paratext muestra ese versículo.
+\description Marca una letra mayúscula después de un número de versículo cuando el versículo anterior terminó con puntuación que no es de fin de oración (p. ej., coma, punto y coma, dos puntos). Las opciones permiten definir los caracteres de fin de oración, palabras/prefijos/sufijos para ignorar, el manejo de comillas de apertura y los estilos de carácter/párrafo a omitir. También escribe un informe HTML (CapitalAtVerseReport.html, se abre automáticamente) que muestra tres palabras de contexto antes y después de cada versículo marcado, excluyendo notas al pie, referencias cruzadas y figuras del contexto. Se pueden ignorar las traducciones con mayúscula de los Términos bíblicos y las palabras que la lista de palabras del proyecto siempre escribe con mayúscula. También se pueden ignorar los nombres con mayúscula de un archivo de diccionario Toolbox/SFM (.dic) opcional. Si ptx_goto.py y ParatextGoTo.exe están en la carpeta cms, al hacer clic en una referencia del informe Paratext muestra ese versículo.
 \books
 \noText
 \toList
@@ -19,17 +19,32 @@
 
 \optionName IgnoreBiblicalTerms
 \optionLocalizedName Ignorar Términos bíblicos con mayúscula
-\optionDescription Establezca en Sí para omitir una palabra o frase con mayúscula que sea una traducción en los Términos bíblicos del proyecto (TermRenderings.xml), como un nombre propio. Establezca en No para marcarlas también; en ese caso los prefijos/sufijos a ignorar se aplican solo a las Palabras a ignorar y a la lista de palabras.
+\optionDescription Escoge "Sí" para omitir una palabra o frase con mayúscula que sea una traducción en los Términos bíblicos del proyecto (TermRenderings.xml), como un nombre propio. Escoge "No" para marcarlas también; en ese caso los prefijos/sufijos a ignorar se aplican solo a las Palabras a ignorar y a la lista de palabras.
 \optionDefault Yes
 
 \optionName IgnoreWordlistCapitals
 \optionLocalizedName Ignorar palabras con mayúscula de la Lista de palabras
-\optionDescription Establezca en Sí para omitir una palabra que la Lista de palabras del proyecto marca como siempre con mayúscula (una grafía específica en SpellingStatus.xml, p. ej. Galilaaya). También se omite si lleva uno de los prefijos/sufijos a ignorar.
+\optionDescription Escoge "Sí" para omitir una palabra que la Lista de palabras del proyecto marca como siempre con mayúscula (una grafía específica en SpellingStatus.xml, p. ej. Galilaaya). También se omite si lleva uno de los prefijos/sufijos a ignorar.
 \optionDefault Yes
+
+\optionName NamesDictionaryFile
+\optionLocalizedName Archivo del diccionario de nombres (opcional)
+\optionDescription Opcional. Ruta completa de un archivo de diccionario Toolbox/SFM (.dic) cuyos nombres con mayúscula no deben marcarse, p. ej. C:\Dictionaries\names.dic. Deje este campo vacío (valor predeterminado) para desactivar la función. Los marcadores que se leen se definen en «Marcadores del diccionario de nombres», más abajo.
+\optionDefault
+
+\optionName NamesDictionaryMarkers
+\optionLocalizedName Marcadores del diccionario de nombres
+\optionDescription Lista separada por comas de nombres de marcadores (sin barra invertida) cuyos valores se leen del archivo del diccionario de nombres, p. ej. `lx` o `lx, a`. Escriba los marcadores que necesite; solo se aceptan letras, dígitos y guiones bajos. Se usa la primera palabra de cada valor, sin un + inicial y sin lo que siga a un / o a un |. Solo se usan los nombres que empiezan con mayúscula. No tiene efecto mientras el archivo del diccionario de nombres esté vacío.
+\optionDefault lx
+
+\optionName NamesDictionaryAllowSuffixes
+\optionLocalizedName Diccionario de nombres: permitir sufijos
+\optionDescription Escoge "Sí" para omitir también cualquier palabra con mayúscula al inicio de versículo que EMPIECE con un nombre del diccionario de nombres, seguido de cualquier sufijo. Escoge "No" para omitir solo los nombres exactos. No tiene efecto mientras el archivo del diccionario de nombres esté vacío.
+\optionDefault No
 
 \optionName IgnoreCapAfterQuote
 \optionLocalizedName Ignorar mayúscula después de comilla de apertura
-\optionDescription Establezca en Sí para suprimir errores donde un versículo comienza con una palabra en mayúscula inmediatamente después de una comilla de apertura (p. ej., discurso directo). Los caracteres que se tratan como apertura se configuran en la opción Caracteres de apertura de cita.
+\optionDescription Escoge "Sí" para suprimir errores donde un versículo comienza con una palabra en mayúscula inmediatamente después de una comilla de apertura (p. ej., discurso directo). Los caracteres que se tratan como apertura se configuran en la opción Caracteres de apertura de cita.
 \optionDefault No
 
 \optionName QuoteOpeningChars
@@ -39,13 +54,13 @@
 
 \optionName IgnoreStyles
 \optionLocalizedName Estilos de carácter para ignorar
-\optionDescription Lista separada por comas de nombres de estilos de carácter USFM (sin barra invertida) cuyo texto se excluye al detectar el último carácter de un versículo. Use para estilos como qs (Selah) o pn (nombres propios) que no terminan con puntuación de fin de oración.
-\optionDefault
+\optionDescription Lista separada por comas de nombres de estilos de carácter USFM (sin barra invertida) cuyo texto se excluye al detectar el último carácter de un versículo. Por defecto es qs (Selah), para que un Selah al final de un versículo no se tome como su último carácter. Agregue otros, como pn (nombres propios), que no terminan con puntuación de fin de oración.
+\optionDefault qs
 
 \optionName IgnoreParaStyles
 \optionLocalizedName Estilos de párrafo para ignorar
-\optionDescription Lista separada por comas de nombres de marcadores de párrafo USFM (sin barra invertida) cuyo texto se excluye al calcular el último carácter de un versículo. El valor predeterminado cubre: sp (locutor), r (referencia paralela), ms/mr (sección mayor), sr (rango de sección). Los encabezados de sección (s, s1, s2...) se suprimen automáticamente. Un salto de párrafo cuyo único texto antes del siguiente versículo es de estos estilos (p. ej. encabezado \s1, luego locutor \sp, luego \q1) también suprime la verificación.
-\optionDefault sp, r, ms, mr, sr
+\optionDescription Lista separada por comas de nombres de marcadores de párrafo USFM (sin barra invertida) cuyo texto se excluye al calcular el último carácter de un versículo. El valor predeterminado cubre: sp (locutor), r (referencia paralela), ms/mr (sección mayor), sr (rango de sección), qa (nombre de letra acróstica). Los encabezados de sección (s, s1, s2...) se suprimen automáticamente. Un salto de párrafo cuyo único texto antes del siguiente versículo es de estos estilos (p. ej. encabezado \s1, luego locutor \sp, luego \q1) también suprime la verificación.
+\optionDefault sp, r, ms, mr, sr, qa
 
 \optionName PrefixesToIgnore
 \optionLocalizedName Prefijos de palabras para ignorar

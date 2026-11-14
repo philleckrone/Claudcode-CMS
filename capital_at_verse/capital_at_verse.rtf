@@ -5,7 +5,7 @@
 \pard\sb0\sa240\qc\b\f0\fs32\cf1 REPORT OF CAPITAL AT VERSE\par
 \pard\sb0\sa80\keepn\b\f0\fs22\cf2 PURPOSE\par
 \pard\sb0\sa120\b0\f0\fs20\cf0 Flags a capital letter at the start of a verse when the previous verse ended with non-sentence-final punctuation (e.g., a comma, semicolon, colon, or a plain word). This often indicates a sentence has been split across verses without appropriate punctuation at the end of the first verse.\par
-\pard\sb0\sa120\f0\fs20 Capitalized terms that appear in the project's TermRenderings.xml (proper names, divine titles, etc.) are excluded from flagging (option IgnoreBiblicalTerms, on by default). So are words that the project's Wordlist marks as always capitalized (option IgnoreWordlistCapitals, on by default). A rendering can be a multi-word term (e.g. Nueva Jerusalen); the check requires the whole term, word for word in order, to appear at the verse start -- matching only the first word of a multi-word term is not enough to suppress the warning. Alternative renderings separated by || in a TermRendering entry (e.g. Nueva Jerusalen||Jerusalen Nueva) are each treated as their own separate term. Wildcard entries in TermRenderings are supported: a rendering stored as Dios* will also suppress Dioses; *Dios will suppress raDios; *Dios* suppresses both prefixed and suffixed forms. Wildcards may be applied to any word of a multi-word term, not just single-word terms.\par
+\pard\sb0\sa120\f0\fs20 Capitalized terms that appear in the project's TermRenderings.xml (proper names, divine titles, etc.) are excluded from flagging (option IgnoreBiblicalTerms, on by default). So are words that the project's Wordlist marks as always capitalized (option IgnoreWordlistCapitals, on by default). Capitalized names from an optional Toolbox/SFM dictionary (.dic) file can be ignored too: set NamesDictionaryFile and NamesDictionaryMarkers (off by default). A rendering can be a multi-word term (e.g. Nueva Jerusalen); the check requires the whole term, word for word in order, to appear at the verse start -- matching only the first word of a multi-word term is not enough to suppress the warning. Alternative renderings separated by || in a TermRendering entry (e.g. Nueva Jerusalen||Jerusalen Nueva) are each treated as their own separate term. Wildcard entries in TermRenderings are supported: a rendering stored as Dios* will also suppress Dioses; *Dios will suppress raDios; *Dios* suppresses both prefixed and suffixed forms. Wildcards may be applied to any word of a multi-word term, not just single-word terms.\par
 \pard\sb0\sa120\f0\fs20{\i Note:} only a term's first word needs to start with a capital letter to be eligible (matching this check's own trigger condition); a capitalized word buried in the middle of a multi-word term is no longer separately whitelisted on its own -- the full term must match.\par
 \pard\sb0\sa120\f0\fs20 Words written with decomposed tone or accent marks (a base letter followed by a separate combining mark, as in some Africanist/IPA-based orthographies) are matched and compared as whole units, and a verse ending in such a word is correctly recognized as ending in a letter rather than in the mark itself.\par
 \pard\sb240\sa80\keepn\b\f0\fs22\cf2 HOW TO USE\par
@@ -30,6 +30,15 @@
 \pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 IgnoreWordlistCapitals\par
 \pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i Yes}\par
 \pard\li720\sb40\sa80\f0\fs20 Shown as "Ignore capitalized words in the Wordlist". Set to Yes to skip a verse-start word that the project's Wordlist marks as always written with a capital (a word with a specific case in SpellingStatus.xml, e.g. Galilaaya). The word must match exactly. A listed word with one of the PrefixesToIgnore/SuffixesToIgnore attached is also skipped.\par
+\pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 NamesDictionaryFile\par
+\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i (empty = off)}\par
+\pard\li720\sb40\sa80\f0\fs20 Shown as "Names dictionary file (optional)". Optional. Full path of a Toolbox/SFM dictionary (.dic) file whose capitalized names should not be flagged, for example C:\\Dictionaries\\names.dic. Leave empty to turn the feature off. The names are treated like capitalized Biblical Terms renderings, so PrefixesToIgnore/SuffixesToIgnore also build on them. If the file or the marker is not usable, the check says so in the results list and runs without the dictionary.\par
+\pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 NamesDictionaryMarkers\par
+\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i lx}\par
+\pard\li720\sb40\sa80\f0\fs20 Shown as "Names dictionary markers". Comma-separated list of marker names (without backslash) whose values are read from the names dictionary file, for example: lx or lx, a. Any markers can be typed; only letters, digits and underscores are accepted (up to 32 characters each, up to 20 markers). The first word of each value is used, without a leading + and without anything after a / or |. Only names that begin with a capital letter are used. Has no effect while NamesDictionaryFile is empty.\par
+\pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 NamesDictionaryAllowSuffixes\par
+\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i No}\par
+\pard\li720\sb40\sa80\f0\fs20 Shown as "Names dictionary: allow suffixes". Set to Yes to also skip any capitalized verse-start word that begins with a name from the names dictionary, for languages where suffixes combine too freely to list in SuffixesToIgnore. Set to No to skip only exact names. Has no effect while NamesDictionaryFile is empty.\par
 \pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 IgnoreCapAfterQuote\par
 \pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i No}\par
 \pard\li720\sb40\sa80\f0\fs20 Set to Yes to suppress errors where a verse begins with a capitalized word that immediately follows an opening quotation mark (e.g., direct speech introduced after a comma or semicolon). The characters treated as openers are configured by the QuoteOpeningChars option below.\par
@@ -37,21 +46,22 @@
 \pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i \'ab\'93\'97\'91}\par
 \pard\li720\sb40\sa80\f0\fs20 Characters treated as opening quotation marks when IgnoreCapAfterQuote is set to Yes. Each character in this string is an opener. Default covers left guillemet (\'ab), left double curly quote (\'93), em dash (\'97), and left single curly quote (\'91). Clear this field to fall back to Unicode Pi-category detection.\par
 \pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 IgnoreStyles\par
-\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i (empty)}\par
+\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i qs}\par
 \pard\li720\sb40\sa0\f0\fs20 Comma-separated list of USFM character style names (without backslash) whose enclosed text is excluded when detecting the last character of a verse. Use this for paired character styles like {\f1\\qs...\\qs*} (Selah text in Psalms) or {\f1\\pn...\\pn*} (proper names) that do not end with sentence-final punctuation.\par
 \pard\li720\sb40\sa0\f0\fs20 Use for styles like:\par
 \pard\li1080\sb0\sa0\f0\fs20{\f1\b qs}  - Selah / acrostic heading text (e.g. {\f1\\qs Selah\\qs*})\par
 \pard\li1080\sb0\sa60\f0\fs20{\f1\b pn}  - Proper name spans\par
 \pard\li720\sb0\sa80\f0\fs20{\b Example entry:}  {\f1 qs, pn}\par
 \pard\li360\sb160\sa0\keepn\b\f1\fs20\cf3 IgnoreParaStyles\par
-\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i sp, r, ms, mr, sr}\par
+\pard\li720\sb60\sa0\b0\f0\fs20{\b Default:}  {\i sp, r, ms, mr, sr, qa}\par
 \pard\li720\sb40\sa0\f0\fs20 Comma-separated list of USFM paragraph marker names (without backslash) whose marker and following text are excluded when computing the last character of a verse. Use this for structural markers that appear between verses but whose text should not count as the sentence-final character.\par
 \pard\li720\sb60\sa0\f0\fs20{\b Default markers covered:}\par
 \pard\li1080\sb0\sa0\f0\fs20{\f1\b sp}  - Speaker / Selah label (e.g., in Psalms or Song of Solomon)\par
 \pard\li1080\sb0\sa0\f0\fs20{\f1\b r}   - Parallel passage reference\par
 \pard\li1080\sb0\sa0\f0\fs20{\f1\b ms}  - Major section heading\par
 \pard\li1080\sb0\sa0\f0\fs20{\f1\b mr}  - Major section range reference\par
-\pard\li1080\sb0\sa60\f0\fs20{\f1\b sr}  - Section range reference\par
+\pard\li1080\sb0\sa0\f0\fs20{\f1\b sr}  - Section range reference\par
+\pard\li1080\sb0\sa60\f0\fs20{\f1\b qa}  - Acrostic letter name (e.g., Aleph in Psalm 119)\par
 \pard\li720\sb0\sa0\f0\fs20{\i Note:} Section headings ({\f1\\s}, {\f1\\s1}, {\f1\\s2}, etc.) are handled automatically by the check and do not need to be listed here.\par
 \pard\li720\sb40\sa0\f0\fs20 A paragraph break followed only by text in these styles also stops the check. For example, when a verse is followed by {\f1\\s1} heading, then {\f1\\sp} speaker, then {\f1\\q1}, the next verse is not checked (common in Song of Songs).\par
 \pard\li720\sb40\sa80\f0\fs20 To disable this feature entirely, clear the option value.\par

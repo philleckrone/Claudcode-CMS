@@ -4,7 +4,7 @@
 OBJET
 Signale une majuscule au début d’un verset quand le verset précédent se termine par une ponctuation qui ne finit pas la phrase (p. ex. une virgule, un point-virgule, deux-points ou un simple mot). Cela indique souvent qu’une phrase a été coupée entre deux versets sans la ponctuation voulue à la fin du premier.
 
-Les termes avec majuscule qui figurent dans le TermRenderings.xml du projet (noms propres, titres divins, etc.) ne sont pas signalés (option « Ignorer les termes bibliques avec majuscule », activée par défaut). De même pour les mots que la liste de mots du projet indique comme toujours écrits avec une majuscule (option « Ignorer les mots avec majuscule de la liste de mots », activée par défaut). Un rendu peut compter plusieurs mots (p. ex. Nueva Jerusalen) ; la vérification exige alors que le terme entier, mot pour mot et dans l’ordre, se trouve au début du verset -- il ne suffit pas que le premier mot corresponde pour supprimer l’avertissement. Les rendus séparés par || dans une entrée de TermRenderings (p. ex. Nueva Jerusalen||Jerusalen Nueva) sont chacun traités comme un terme distinct.
+Les termes avec majuscule qui figurent dans le TermRenderings.xml du projet (noms propres, titres divins, etc.) ne sont pas signalés (option « Ignorer les termes bibliques avec majuscule », activée par défaut). De même pour les mots que la liste de mots du projet indique comme toujours écrits avec une majuscule (option « Ignorer les mots avec majuscule de la liste de mots », activée par défaut). Les noms avec majuscule d’un fichier de dictionnaire Toolbox/SFM (.dic) facultatif peuvent aussi être ignorés : renseignez « Fichier du dictionnaire de noms (facultatif) » et « Marqueurs du dictionnaire de noms » (désactivé par défaut). Un rendu peut compter plusieurs mots (p. ex. Nueva Jerusalen) ; la vérification exige alors que le terme entier, mot pour mot et dans l’ordre, se trouve au début du verset -- il ne suffit pas que le premier mot corresponde pour supprimer l’avertissement. Les rendus séparés par || dans une entrée de TermRenderings (p. ex. Nueva Jerusalen||Jerusalen Nueva) sont chacun traités comme un terme distinct.
 Les jokers sont pris en charge dans TermRenderings : un rendu enregistré comme
 Dios* supprime aussi Dioses ; *Dios supprime raDios ; *Dios* supprime les
 formes avec préfixe et avec suffixe. Un joker peut s’appliquer à n’importe quel mot d’un terme de plusieurs mots, pas seulement aux termes d’un seul mot.
@@ -40,6 +40,18 @@ OPTIONS
     Par défaut : Yes
     Yes ignore un mot en début de verset que la liste de mots du projet indique comme toujours écrit avec une majuscule (un mot avec une casse précise dans SpellingStatus.xml, p. ex. Galilaaya). Le mot doit correspondre exactement. Un tel mot auquel s’ajoute l’un des préfixes ou suffixes à ignorer est aussi ignoré.
 
+  Fichier du dictionnaire de noms (facultatif)
+    Par défaut : (vide = désactivé)
+    Facultatif. Chemin complet d’un fichier de dictionnaire Toolbox/SFM (.dic) dont les noms avec majuscule ne doivent pas être signalés, p. ex. C:\Dictionaries\names.dic. Laissez vide pour désactiver la fonction. Les noms sont traités comme des rendus de termes bibliques avec majuscule : « Préfixes de mots à ignorer » et « Suffixes de mots à ignorer » s’appuient donc aussi sur eux. Si le fichier ou le marqueur est inutilisable, la vérification le signale dans la liste des résultats et s’exécute sans le dictionnaire.
+
+  Marqueurs du dictionnaire de noms
+    Par défaut : lx
+    Liste, séparée par des virgules, de noms de marqueurs (sans barre oblique inverse) dont les valeurs sont lues dans le fichier du dictionnaire de noms, p. ex. : lx ou lx, a. N’importe quels marqueurs peuvent être saisis ; seuls les lettres, chiffres et traits de soulignement sont acceptés (32 caractères au plus chacun, 20 marqueurs au plus). Le premier mot de chaque valeur est utilisé, sans + initial et sans rien de ce qui suit un / ou un | (ainsi « \a Tayta / V_ | note » donne Tayta). Seuls les noms commençant par une majuscule sont utilisés. Sans effet tant que « Fichier du dictionnaire de noms (facultatif) » est vide.
+
+  Dictionnaire de noms : accepter les suffixes
+    Par défaut : No
+    Yes ignore aussi tout mot avec majuscule en début de verset qui commence par un nom du dictionnaire de noms, pour les langues dont les suffixes se combinent trop librement pour être listés dans « Suffixes de mots à ignorer ». No ne saute que les noms exacts. Sans effet tant que « Fichier du dictionnaire de noms (facultatif) » est vide.
+
   Ignorer la majuscule après un guillemet ouvrant
     Par défaut : No
     Yes supprime les erreurs où un verset commence par un mot avec majuscule qui suit immédiatement un guillemet ouvrant (p. ex. un discours direct introduit après une virgule ou un point-virgule). Les caractères traités comme guillemets ouvrants se règlent avec l’option « Caractères de guillemet ouvrant » ci-dessous.
@@ -49,12 +61,12 @@ OPTIONS
     Caractères traités comme guillemets ouvrants quand « Ignorer la majuscule après un guillemet ouvrant » est sur Yes. Chaque caractère de cette chaîne est un guillemet ouvrant. La valeur par défaut comprend le guillemet français ouvrant («), le guillemet double anglais ouvrant ("), le tiret cadratin (—) et le guillemet simple anglais ouvrant ('). Videz ce champ pour revenir à la détection par la catégorie Unicode Pi.
 
   Styles de caractère à ignorer
-    Par défaut : (vide)
+    Par défaut : qs
     Liste, séparée par des virgules, de noms de styles de caractère USFM (sans barre oblique inverse) dont le texte est exclu pour trouver le dernier caractère d’un verset. Utilisez-la pour les styles de caractère appariés comme \qs...\qs* (Sélah dans les Psaumes) ou \pn...\pn* (noms propres) qui ne se terminent pas par une ponctuation de fin de phrase.
-    Exemple de saisie : qs, pn
+    Exemple de saisie : qs, pn  (la valeur par défaut est qs ; ajoutez les autres à la suite)
 
   Styles de paragraphe à ignorer
-    Par défaut : sp, r, ms, mr, sr
+    Par défaut : sp, r, ms, mr, sr, qa
     Liste, séparée par des virgules, de noms de marqueurs de paragraphe USFM (sans barre oblique inverse) dont le marqueur et le texte qui suit sont exclus pour trouver le dernier caractère d’un verset. Utilisez-la pour les marqueurs de structure placés entre les versets, dont le texte ne doit pas compter comme fin de phrase.
     Marqueurs compris par défaut :
       sp  - Locuteur / mention Sélah (p. ex. dans les Psaumes ou le Cantique des cantiques)
@@ -62,6 +74,7 @@ OPTIONS
       ms  - Titre de division majeure
       mr  - Plage de références de la division majeure
       sr  - Plage de références de la section
+      qa  - Nom de lettre acrostiche (p. ex. Aleph dans le Psaume 119)
     Remarque : les titres de section (\s, \s1, \s2, etc.) sont traités automatiquement par la vérification et n’ont pas à figurer ici.
     Un changement de paragraphe suivi seulement de texte dans ces styles arrête aussi la vérification. Par exemple, quand un verset est suivi d’un titre \s1, puis d’un locuteur \sp, puis de \q1, le verset suivant n’est pas vérifié (fréquent dans le Cantique des cantiques).
     Pour désactiver complètement cette fonction, videz la valeur de l’option.

@@ -1,7 +1,7 @@
 ﻿\check Report of Capital at Verse
 \submenu Phil_new
 \script capital_at_verse.py
-\description Flags a capital letter after a verse number when the previous verse ended with non-sentence-final punctuation (e.g. comma, semicolon, colon). Options let you set sentence-final characters, words/prefixes/suffixes to ignore, quote-opening handling, and character/paragraph styles to skip. Also writes an HTML report (CapitalAtVerseReport.html, opened automatically) showing three words of context before and after each flagged verse number, with footnotes, cross-references, and figures excluded from the context. Capitalized Biblical Terms renderings and words the project's wordlist always capitalizes can be ignored. When ptx_goto.py and ParatextGoTo.exe are in the cms folder, clicking a reference in the report shows that verse in Paratext.
+\description Flags a capital letter after a verse number when the previous verse ended with non-sentence-final punctuation (e.g. comma, semicolon, colon). Options let you set sentence-final characters, words/prefixes/suffixes to ignore, quote-opening handling, and character/paragraph styles to skip. Also writes an HTML report (CapitalAtVerseReport.html, opened automatically) showing three words of context before and after each flagged verse number, with footnotes, cross-references, and figures excluded from the context. Capitalized Biblical Terms renderings and words the project's wordlist always capitalizes can be ignored. Capitalized names in an optional Toolbox/SFM dictionary (.dic) file can also be ignored. When ptx_goto.py and ParatextGoTo.exe are in the cms folder, clicking a reference in the report shows that verse in Paratext.
 \books
 \noText
 \toList
@@ -27,6 +27,21 @@
 \optionDescription Set to Yes to skip a word that the project's Wordlist marks as always capitalized (a specific case in SpellingStatus.xml, e.g. Galilaaya). A listed word with one of the prefixes/suffixes to ignore attached is also skipped.
 \optionDefault Yes
 
+\optionName NamesDictionaryFile
+\optionLocalizedName Names dictionary file (optional)
+\optionDescription Optional. Full path of a Toolbox/SFM dictionary (.dic) file whose capitalized names should not be flagged, for example C:\Dictionaries\names.dic. Leave this empty (the default) to turn the feature off. The markers to read are set by Names dictionary markers below.
+\optionDefault
+
+\optionName NamesDictionaryMarkers
+\optionLocalizedName Names dictionary markers
+\optionDescription Comma-separated marker names (no backslash) whose values are read from the names dictionary file, for example lx or lx, a. Type any markers you need; only letters, digits and underscores are accepted. The first word of each value is used, without a leading + and without anything after a / or |. Only names that begin with a capital letter are used. Has no effect while Names dictionary file is empty.
+\optionDefault lx
+
+\optionName NamesDictionaryAllowSuffixes
+\optionLocalizedName Names dictionary: allow suffixes
+\optionDescription Set to Yes to also ignore any capitalized verse-start word that BEGINS with a name from the names dictionary, followed by any suffixes. Set to No to skip only exact names. Has no effect while Names dictionary file is empty.
+\optionDefault No
+
 \optionName IgnoreCapAfterQuote
 \optionLocalizedName Ignore capital after opening quote
 \optionDescription Set to Yes to suppress errors where a verse begins with a capitalized word immediately after an opening quotation mark (e.g. direct speech). The characters treated as openers are configured by the Opening quote characters option below.
@@ -39,13 +54,13 @@
 
 \optionName IgnoreStyles
 \optionLocalizedName Character styles to ignore
-\optionDescription Comma-separated USFM character style names (no backslash) whose enclosed text is excluded when detecting the last character of a verse. Use for styles like qs (Selah) or pn (proper names) that do not end with sentence-final punctuation.
-\optionDefault
+\optionDescription Comma-separated USFM character style names (no backslash) whose enclosed text is excluded when detecting the last character of a verse. Default is qs (Selah), so a Selah at the end of a verse is not taken as its last character. Add others, such as pn (proper names), that do not end with sentence-final punctuation.
+\optionDefault qs
 
 \optionName IgnoreParaStyles
 \optionLocalizedName Paragraph styles to ignore
-\optionDescription Comma-separated USFM paragraph marker names (no backslash) whose text is excluded when computing the last character of a verse. Default covers: sp (speaker), r (parallel reference), ms/mr (major section), sr (section range). Section headings (s, s1, s2...) are suppressed automatically without this option. A paragraph break whose only text before the next verse is from these styles (e.g. \s1 heading, then \sp speaker, then \q1) also suppresses the check.
-\optionDefault sp, r, ms, mr, sr
+\optionDescription Comma-separated USFM paragraph marker names (no backslash) whose text is excluded when computing the last character of a verse. Default covers: sp (speaker), r (parallel reference), ms/mr (major section), sr (section range), qa (acrostic letter name). Section headings (s, s1, s2...) are suppressed automatically without this option. A paragraph break whose only text before the next verse is from these styles (e.g. \s1 heading, then \sp speaker, then \q1) also suppresses the check.
+\optionDefault sp, r, ms, mr, sr, qa
 
 \optionName PrefixesToIgnore
 \optionLocalizedName Word prefixes to ignore
