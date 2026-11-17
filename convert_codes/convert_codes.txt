@@ -8,10 +8,10 @@ working with exported data or reports that use numeric verse identifiers
 instead of standard references.
 
 HOW TO USE
-1. Copy the .cms and .py files to your My Paratext 9 Projects\cms folder.
+1. Install the Phils Custom (cms) Checks plugin with Install_Phils_tools.exe. Everything comes with the plugin: nothing has to be copied into the cms folder.
 2. Copy a list of numeric codes to your clipboard (one code per line, or
    comma-separated). Codes may also be in XML format with <Verse> tags.
-3. In Paratext, run the check from Project menu > Tools > Custom Tools > Phil_new.
+3. In Paratext, choose Tools > Phils Custom (cms) Checks..., select this check and click "Run...". In Paratext's check window, choose the books and set the options (Options...) before you click OK.
 4. The results list shows each code alongside its converted reference.
 
 CODE FORMAT

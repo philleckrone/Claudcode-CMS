@@ -36,9 +36,8 @@ la versión en inglés del check; su nombre no está traducido a propósito, ya
 que es solo para diagnóstico técnico.)
 
 CÓMO USAR
-1. Copie los archivos .cms y .py a su carpeta My Paratext Projects\cms. Para que las referencias del informe HTML se puedan pulsar (un clic muestra ese lugar en Paratext), copie allí también ptx_goto.py y ParatextGoTo.exe. La primera vez el navegador pregunta si desea abrir ParatextGoTo, y Paratext solo sigue la referencia cuando el grupo de desplazamiento de la ventana sigue a otros programas.
-2. En Paratext, ejecute la verificación desde el menú Proyecto > Herramientas
-   > Herramientas personalizadas > Herramientas_Español.
+1. Instale el complemento Verificaciones personalizadas (cms) de Phil con Install_Phils_tools.exe. Todo viene con el complemento: no hay que copiar nada a la carpeta cms. Las referencias del informe HTML se pueden pulsar para mostrar ese lugar en Paratext. La primera vez el navegador pregunta si desea abrir ParatextGoTo, y Paratext solo sigue la referencia cuando el grupo de desplazamiento de la ventana sigue a otros programas.
+2. En Paratext, elija Herramientas > Verificaciones personalizadas (cms) de Phil..., seleccione esta verificación y haga clic en «Ejecutar...». En la ventana de verificación de Paratext, elija los libros y ajuste las opciones antes de ejecutarla.
 3. Revise la lista de resultados para ver el texto de la leyenda/derechos de
    autor de cada figura, y el informe InformeDeFigura.html (abierto
    automáticamente) para ver la misma información en una sola tabla.

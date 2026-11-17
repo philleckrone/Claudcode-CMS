@@ -6,8 +6,8 @@ Scans text for all-lowercase or all-uppercase words and shows what they would lo
 Can also convert a specific word or phrase that you highlight and copy.
 
 HOW TO USE
-1. Copy the .cms and .py files to your My Paratext 9 Projects\cms folder.
-2. To convert a specific word: highlight it in Paratext and press Ctrl+C, then run the check from Project menu > Tools > Custom Tools > Phil_new. The results will show all case variants for that word.
+1. Install the Phils Custom (cms) Checks plugin with Install_Phils_tools.exe. Everything comes with the plugin: nothing has to be copied into the cms folder.
+2. To convert a specific word: highlight it in Paratext and press Ctrl+C, then choose Tools > Phils Custom (cms) Checks..., select this check and click "Run...". In Paratext's check window, choose the books and set the options (Options...) before you click OK. The results will show all case variants for that word.
 3. To scan a passage for all-lower or all-upper words: leave the FilterWord option empty and run the check normally.
 4. Review the results list for conversion suggestions.
 

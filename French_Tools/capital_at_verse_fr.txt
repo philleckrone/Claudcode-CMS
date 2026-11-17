@@ -14,11 +14,11 @@ Remarque : seul le premier mot d’un terme doit commencer par une majuscule po
 Les mots écrits avec des marques de ton ou des accents décomposés (une lettre de base suivie d’un diacritique combinant séparé, comme dans certaines orthographes africanistes ou fondées sur l’API) sont reconnus et comparés comme des unités entières, et un verset qui se termine par un tel mot est bien reconnu comme se terminant par une lettre et non par le diacritique.
 
 MODE D’EMPLOI
-1. Copiez les fichiers .cms et .py, ptx_goto.py et ParatextGoTo.exe dans votre dossier My Paratext 9 Projects\cms.
-2. Dans Paratext, lancez la vérification depuis le menu du projet > Outils > Outils personnalisés > Outils_Français.
+1. Installez le module Vérifications personnalisées (cms) de Phil avec Install_Phils_tools.exe. Tout est fourni avec le module : rien n'est à copier dans le dossier cms. Les références du rapport HTML sont cliquables : un clic montre cet endroit dans Paratext. Au premier clic, le navigateur demande s'il faut ouvrir ParatextGoTo, et Paratext ne suit la référence que si le groupe de défilement de la fenêtre de texte suit les autres programmes.
+2. Dans Paratext, choisissez Outils > Vérifications personnalisées (cms) de Phil..., sélectionnez cette vérification et cliquez sur « Exécuter... ». Dans la fenêtre de vérification de Paratext, choisissez les livres et réglez les options avant de la lancer.
 3. Examinez la liste des résultats ; chaque élément signalé montre la référence et un extrait du texte autour du problème.
 4. Un rapport RapportMajusculeDebutVerset.html s’ouvre aussi automatiquement dans votre navigateur. Il montre trois mots de contexte avant et après chaque numéro de verset signalé, sans les notes de bas de page, renvois et illustrations.
-5. Cliquez sur une référence du rapport pour afficher ce verset dans Paratext. La première fois, le navigateur demande s’il faut ouvrir ParatextGoTo ; acceptez (vous pouvez cocher « toujours autoriser »). Paratext ne suit que si le groupe de défilement de la fenêtre de texte suit les autres programmes (le même réglage que pour FieldWorks ou Logos). Les clics demandent ptx_goto.py et ParatextGoTo.exe dans le dossier cms ; sans eux, les références sont du texte simple. La vérification enregistre le type de lien pour l’utilisateur Windows actuel seulement ; aucun droit d’administrateur n’est nécessaire.
+5. Cliquez sur une référence du rapport pour afficher ce verset dans Paratext. La première fois, le navigateur demande s’il faut ouvrir ParatextGoTo ; acceptez (vous pouvez cocher « toujours autoriser »). Paratext ne suit que si le groupe de défilement de la fenêtre de texte suit les autres programmes (le même réglage que pour FieldWorks ou Logos). La vérification enregistre le type de lien pour l’utilisateur Windows actuel seulement ; aucun droit d’administrateur n’est nécessaire.
 
 OPTIONS
   Caractères de fin de phrase

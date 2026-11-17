@@ -6,8 +6,8 @@ Parcourt le texte à la recherche de mots tout en minuscules ou tout en majuscul
 Peut aussi convertir un mot ou une expression précise que vous sélectionnez et copiez.
 
 MODE D'EMPLOI
-1. Copiez les fichiers .cms et .py dans votre dossier My Paratext 9 Projects\cms.
-2. Pour convertir un mot précis : sélectionnez-le dans Paratext et appuyez sur Ctrl+C, puis lancez la vérification depuis le menu Projet > Outils > Outils personnalisés > Outils_Français. Les résultats montrent toutes les formes de ce mot.
+1. Installez le module Vérifications personnalisées (cms) de Phil avec Install_Phils_tools.exe. Tout est fourni avec le module : rien n'est à copier dans le dossier cms.
+2. Pour convertir un mot précis : sélectionnez-le dans Paratext et appuyez sur Ctrl+C, puis choisissez Outils > Vérifications personnalisées (cms) de Phil..., sélectionnez cette vérification et cliquez sur « Exécuter... ». Dans la fenêtre de vérification de Paratext, choisissez les livres et réglez les options avant de la lancer. Les résultats montrent toutes les formes de ce mot.
 3. Pour chercher dans un passage les mots tout en minuscules ou tout en majuscules : laissez vide l'option Mot ou expression à vérifier et lancez la vérification normalement.
 4. Consultez la liste des résultats pour voir les conversions proposées.
 

@@ -8,12 +8,11 @@ pour travailler avec des données exportées ou des rapports qui identifient
 les versets par des numéros au lieu de références habituelles.
 
 MODE D'EMPLOI
-1. Copiez les fichiers .cms et .py dans votre dossier My Paratext 9 Projects\cms.
+1. Installez le module Vérifications personnalisées (cms) de Phil avec Install_Phils_tools.exe. Tout est fourni avec le module : rien n'est à copier dans le dossier cms.
 2. Copiez une liste de codes numériques dans le presse-papiers (un code par
    ligne, ou séparés par des virgules). Les codes peuvent aussi être au format
    XML, avec des balises <Verse>.
-3. Dans Paratext, lancez la vérification depuis le menu Projet > Outils >
-   Outils personnalisés > Outils_Français.
+3. Dans Paratext, choisissez Outils > Vérifications personnalisées (cms) de Phil..., sélectionnez cette vérification et cliquez sur « Exécuter... ». Dans la fenêtre de vérification de Paratext, choisissez les livres et réglez les options avant de la lancer.
 4. La liste des résultats montre chaque code avec la référence obtenue.
 
 FORMAT DES CODES

@@ -33,8 +33,8 @@ apparaît dans le dossier du projet avec les détails - merci d’en communiquer
 le contenu pour que la vérification puisse être corrigée.
 
 MODE D’EMPLOI
-1. Copiez les fichiers .cms et .py dans votre dossier My Paratext Projects\cms. Pour rendre cliquables les références du rapport HTML (un clic affiche cet endroit dans Paratext), copiez-y aussi ptx_goto.py et ParatextGoTo.exe. Au premier clic, le navigateur demande s’il faut ouvrir ParatextGoTo, et Paratext ne suit que si le groupe de défilement de la fenêtre de texte suit les autres programmes.
-2. Dans Paratext, lancez la vérification depuis le menu du projet > Outils > Outils personnalisés > Outils_Français.
+1. Installez le module Vérifications personnalisées (cms) de Phil avec Install_Phils_tools.exe. Tout est fourni avec le module : rien n'est à copier dans le dossier cms. Les références du rapport HTML sont cliquables : un clic montre cet endroit dans Paratext. Au premier clic, le navigateur demande s'il faut ouvrir ParatextGoTo, et Paratext ne suit la référence que si le groupe de défilement de la fenêtre de texte suit les autres programmes.
+2. Dans Paratext, choisissez Outils > Vérifications personnalisées (cms) de Phil..., sélectionnez cette vérification et cliquez sur « Exécuter... ». Dans la fenêtre de vérification de Paratext, choisissez les livres et réglez les options avant de la lancer.
 3. Consultez la liste des résultats pour la légende et le copyright de chaque
    illustration, et le rapport LegendesIllustrations.html (ouvert
    automatiquement) pour les mêmes informations dans un seul tableau.
